@@ -2,8 +2,11 @@
 from google.cloud import bigquery
 
 def signup(client):
+    print("\n+--------------------------+")
+    print("| Welcome to signup window |")
+    print("+--------------------------+")
     try:
-        username = input("Create your username: ")
+        username = input("\nCreate your username: ")
         password = input("Create your password: ")
 
         # Check for uniqueness of user id, this might be a problem later
@@ -15,23 +18,12 @@ def signup(client):
         query_job = client.query(query)
         query_job.result()
 
-        # # Fetch the newly created user ID
-        # query = f"""
-        #     SELECT UserID
-        #     FROM theta-cell-406519.inflation_data.user_data
-        #     WHERE Username = '{username}' AND Password = '{password}'
-        # """
-
-        # query_job = client.query(query)
-        # results = query_job.result()
-
-        # user_id = None
-        # for row in results:
-        #     user_id = row.UserID
-
-        # if user_id:
-        print("Signup successful!")
-        return {"user": username, "password": password}
+        print("\n+--------------------+")
+        print("| Signup successful! |")
+        print("+--------------------+")
+        return "OK"
     except:
-            print("Signup failed. Please try again.")
+            print("\n+----------------------------------+")
+            print("| Signup failed. Please try again. |")
+            print("+----------------------------------+")
             return None

@@ -1,13 +1,18 @@
 # data_operations/create.py
 
 from google.cloud import bigquery
+import time
 
 def create_entry(client):
+    print("\n+----------------------------+")
+    print("| Welcome to Add Data Window |")
+    print("+----------------------------+")
+    time.sleep(0.5)
     try:
-        country = input("Enter country name: ")
-        country_code = input("Enter country code: ")
-        year = input("Enter year: ")
-        inflation = input("Enter inflation index: ")
+        country = input("\nEnter country name you want to add: ")
+        country_code = input(f"Enter country code for {country}: ")
+        year = input("Enter year of data record: ")
+        inflation = input(f"Enter inflation index for {year}: ")
 
         # Check if the entry already exists in CountryInfo
         query_country_info = f"""
@@ -58,10 +63,11 @@ def create_entry(client):
             """
             client.query(query_update_inflation_data).result()
 
-        print("Data Added successfully")
+        print("\nData Added successfully")
+        time.sleep(1)
 
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"Encountered Error: {e}")
 
 
 # from google.cloud import bigquery

@@ -2,7 +2,10 @@
 from google.cloud import bigquery
 
 def login(client):
-    username = input("Enter your username: ")
+    print("\n+-------------------------+")
+    print("| Welcome to login window |")
+    print("+-------------------------+")
+    username = input("\nEnter your username: ")
     password = input("Enter your password: ")
 
     query = f"""
@@ -18,8 +21,12 @@ def login(client):
         user_count = row.user_count
 
     if user_count > 0:
-        print("Login successful!")
-        return {"user": username, "password": password}
+        print("\n+-------------------+")
+        print("| Login successful! |")
+        print("+-------------------+")
+        return "OK"
     else:
-        print("Login failed. Please check your credentials.")
+        print("\n+----------------------------------------------+")
+        print("| Login failed. Please check your credentials. |")
+        print("+----------------------------------------------+")
         return None

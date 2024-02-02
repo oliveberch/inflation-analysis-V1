@@ -1,6 +1,8 @@
 from google.cloud import bigquery
 from google.oauth2 import service_account
 
+import time
+
 from auth.authenticate import auth_user
 
 from data_operations.create import create_entry
@@ -17,18 +19,25 @@ def main():
     # client = bigquery.Client()
     client = bigquery.Client(credentials=credentials)
 
-    print("Welcome to the Inflation Analysis App!")
+    print("\n+----------------------------------------+")
+    print("| Welcome to the Inflation Analysis App! |")
+    print("+----------------------------------------+")
     try:
         # Authenticate user
         user_credentials = auth_user(client)
 
-        if not user_credentials:
-            print("Exiting the Inflation Analysis App.")
+        if user_credentials != "OK":
+            print("\n+-------------------------------------+")
+            print("| Exiting the Inflation Analysis App. |")
+            print("+-------------------------------------+")
         else:
             # Inflation insight home page
             while True:
-                print("Welcome to Home page")
-                print("\nOptions:")
+                print("\n+----------------------+")
+                print("| Welcome to Home page |")
+                print("+----------------------+")
+                time.sleep(0.5)
+                print("\nHow can we help you? ")
                 print("1. Add Data")
                 print("2. Read Data")
                 print("3. Update Data")
@@ -36,7 +45,7 @@ def main():
                 print("5. Analyse Data")
                 print("6. Exit App")
 
-                user_choice = input("Enter your choice (1-6): ")
+                user_choice = input("\nEnter your choice (1-6): ")
 
                 if user_choice == "1":
                     create_entry(client)
@@ -49,10 +58,14 @@ def main():
                 elif user_choice == "5":
                     analysis_flow(client)
                 elif user_choice == "6":
-                    print("Exiting the Inflation Analysis App. Goodbye!")
+                    print("\n+----------------------------------------------+")
+                    print("| Exiting the Inflation Analysis App. Goodbye! |")
+                    print("+----------------------------------------------+")
                     break
                 else:
-                    print("Invalid choice. Please enter a number between 1 and 6.")
+                    print("\n+--------------------------------------------------------+")
+                    print("| Invalid choice. Please enter a number between 1 and 6. |")
+                    print("+--------------------------------------------------------+")
 
     except Exception as e:
         print(f"Encountered Error: {e}")

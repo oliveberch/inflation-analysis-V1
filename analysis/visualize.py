@@ -1,8 +1,10 @@
 # analysis/visualize.py
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 def filter_data(client, country=None, start_year=None, end_year=None):
+    
     try:
         query = "SELECT * FROM theta-cell-406519.inflation_data.gdp_data WHERE 1=1"
 
@@ -18,10 +20,7 @@ def filter_data(client, country=None, start_year=None, end_year=None):
         query_job = client.query(query)
         results = list(query_job.result())
 
-        for row in results:
-            print(row.CountryCode, row.Year, row.Inflation)
-
-        return pd.DataFrame(results, columns=['CountryCode', 'Year', 'Inflation'])
+        return pd.DataFrame.from_records(results, columns=['CountryCode', 'Year', 'Inflation'])
 
     except Exception as e:
         print(f"Error: {e}")
@@ -41,28 +40,3 @@ def plot_inflation_bar(data):
     plt.xlabel('Year')
     plt.ylabel('Inflation')
     plt.show()
-
-
-# def filter_data(client, country=None, start_year=None, end_year=None):
-#     try:
-#         query = f"SELECT * FROM theta-cell-406519.inflation_data.gdp_data WHERE "
-
-#         if country:
-#             query += f" AND CountryCode='{country}'"
-#         if start_year:
-#             query += f" AND Year>={start_year}"
-#         if end_year:
-#             query += f" AND Year<={end_year}"
-
-#         query_job = client.query(query)
-#         results = query_job.result()
-
-#         data = []
-#         for row in results:
-#             data.append(row)
-
-#         return pd.DataFrame(data, columns=['CountryCode', 'Year', 'Inflation'])
-
-#     except Exception as e:
-#         print(f"Error: {e}")
-#         return pd.DataFrame()
