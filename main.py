@@ -32,6 +32,7 @@ def main():
             print("+-------------------------------------+")
         else:
             # Inflation insight home page
+            
             while True:
                 print("\n+----------------------+")
                 print("| Welcome to Home page |")
