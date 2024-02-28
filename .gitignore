@@ -1,2 +1,5 @@
-#ignore key
+venv
+.vscode
+.env
+__pycache__
 theta-cell-406519-f072918cb9bd.json
