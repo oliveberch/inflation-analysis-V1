@@ -12,7 +12,7 @@ from data_operations.delete import delete_entry
 
 from analysis.analysis_flow import analysis_flow
 
-credentials = service_account.Credentials.from_service_account_file('theta-cell-406519-f072918cb9bd.json')
+credentials = service_account.Credentials.from_service_account_file('GCP_key.json')
 
 def main():
     # Connect to Google BigQuery
